@@ -1,0 +1,197 @@
+1. hücre
+
+Bu kod bloğu, veri kaynaklarından veri setlerini indirmek ve kaggle ortamına yüklemek için kullanılır. İlk olarak, gerekli kütüphaneler ve değişkenler içe aktarılır. CHUNK_SIZE adlı bir değişken, dosyanın parça parça indirilmesini kontrol eder. DATA_SOURCE_MAPPING değişkeni, veri kaynaklarının adlarını ve indirme bağlantılarını içerir.
+
+
+2. hücre 
+
+Python'da yaygın olarak kullanılan çeşitli kütüphaneleri içe aktarıyoruz. Bu kütüphaneler, veri manipülasyonu, sayısal işlemler, görüntü işleme, grafik oluşturma, derin öğrenme modeli oluşturma ve eğitme, veri görselleştirme, dosya işlemleri ve zaman ölçme gibi çeşitli görevler için gereklidir.
+
+
+3. hücre 
+
+"Dicom verilerini okumak için Pandas kütüphanesini kullanıyoruz. pd.read_csv fonksiyonuyla bir CSV dosyasını okuyarak bir DataFrame oluşturuyoruz.
+
+
+4.hücre 
+
+DataFrame'imiz olan 'dicom_data'yı filtreleyerek 'SeriesDescription' sütununun değeri 'cropped images' olan satırları seçiyoruz. Bu satırların 'image_path' sütununu 'cropped_images' adlı bir değişkene atıyoruz.JPEG görüntülerinin dizin yolunu belirlıyoruz.
+cropped_images değişkenini, 'CBIS-DDSM/jpeg' bölümünü 'image_dir' ile değiştirerek uyguluyoruz. Sonrasında ilk 5 dosya için bu dizin yolundaki görüntüleri açıyoruz ve gri tonlamalı görüntüye dönüştürüyoruz. Son olarak, bu gri tonlamalı görüntüleri 'gray' renk haritasıyla görselleştiriyoruz."
+
+
+5. hücre 
+
+full_mammogram_images değişkenini, 'CBIS-DDSM/jpeg' bölümünü 'image_dir' ile değiştirerek uyguluyoruz. Sonrasında ilk 5 dosya için bu dizin yolundaki görüntüleri açıyoruz ve gri tonlamalı görüntüye dönüştürüyoruz. Son olarak, bu gri tonlamalı görüntüleri 'gray' renk haritasıyla görselleştiriyoruz."
+
+
+6. hücre 
+
+DataFrame'imiz olan 'dicom_data'yı 'SeriesDescription' sütununda 'ROI mask images' değerine sahip satırları filtreleyerek seçiyoruz. Bu satırların 'image_path' sütununu 'ROI_mask_images' adlı bir değişkene atıyoruz.JPEG görüntülerinin dizin yolunu belirlemek için '../input/cbis-ddsm-breast-cancer-image-dataset/jpeg' yolu kullanıyoruz.
+ROI_mask_images değişkenini, 'CBIS-DDSM/jpeg' bölümünü 'image_dir' ile değiştirerek uyguluyoruz. Sonrasında ilk 5 dosya için bu dizin yolundaki görüntüleri açıyoruz ve gri tonlamalı görüntüye dönüştürüyoruz. Son olarak, bu gri tonlamalı görüntüleri 'gray' renk haritasıyla görselleştiriyoruz."
+
+7. hücre 
+
+"Verileri 'calc_case_df' adlı bir DataFrame'e yüklemek için 'pd.read_csv' fonksiyonunu kullanıyoruz. Bu fonksiyon, '/kaggle/input/cbis-ddsm-breast-cancer-image-dataset/csv/calc_case_description_train_set.csv' dosyasını okuyarak bir DataFrame'e dönüştürüyor.
+
+
+8. hücre 
+
+ test veri setini  DataFrame'e yüklüyoruz. 'pd.read_csv' fonksiyonu kullanılarak 'dosya okunup bir DataFrame'e dönüştürülüyor."
+
+9. hücre 
+
+"Verileri temizleme adımlarını uygulamak için dicom_data DataFrame'ini kopyalayarak dicom_cleaned_data adında yeni bir DataFrame oluşturuyoruz. Bu şekilde, orijinal verileri değiştirmekten kaçınıyoruz. head() fonksiyonuyla, temizlenmiş DataFrame'in ilk birkaç satırını gösteriyoruz."
+
+10. hücre 
+
+"Temizleme işlemleri için gereksiz olan sütunları kaldırmak için drop() fonksiyonunu kullanarak dicom_cleaned_data DataFrame'inden belirtilen sütunları siliyoruz. Bu adımlar, veri kümesini daha sade hale getirmemize yardımcı olur ve analiz için gereksiz bilgileri kaldırır."
+
+
+11. hücre 
+
+DataFrame'imizdeki eksik değerleri sütun bazında doldurmak için ffill() ve bfill() yöntemlerini kullanıyoruz. 'SeriesDescription' sütunundaki eksik değerleri bir önceki değerle doldururken, 'Laterality' sütunundaki eksik değerleri bir sonraki değerle dolduruyoruz. Daha sonra, her sütunda kaç adet eksik değer olduğunu kontrol etmek için isna().sum() fonksiyonunu kullanıyoruz."
+
+12. hücre 
+
+sütun adlarında değişiklik yapmak için rename() yöntemini kullanıyoruz. Bazı sütun adlarını daha anlaşılır hale getirmek için bu adımları gerçekleştiriyoruz.
+Ardından, belirli sütunlardaki veri tiplerini kategorik tipe dönüştürüyoruz. Bu, bellek kullanımını azaltmaya ve belirli analiz ve işlemleri daha kolay hale getirmeye yardımcı olur.
+Son olarak, her sütunda kaç adet eksik değer olduğunu kontrol etmek için isna().sum() fonksiyonunu kullanıyoruz."
+
+13. hücre 
+
+"Belirli sütunlardaki eksik değerleri doldurmak için bfill() yöntemini kullanarak Data_cleaning_1 DataFrame'indeki 'calc_type' ve 'calc_distribution' sütunlarındaki eksik değerleri bir sonraki değerle dolduruyoruz. Daha sonra, her sütunda kaç adet eksik değer olduğunu kontrol etmek için isna().sum() fonksiyonunu kullanıyoruz."
+
+
+14. hücre 
+
+"Veriyi temizleme işlemleri için 'mass_case_test_df' DataFrame'ini kopyalayarak 'Data_cleaning_2_test' adında yeni bir DataFrame oluşturuyoruz.
+Sütun adlarını daha anlaşılır hale getirmek için rename() yöntemini kullanarak bazı sütun adlarını değiştiriyoruz.
+Belirli sütunlardaki veri tiplerini kategorik tipe dönüştürüyoruz. Bu, bellek kullanımını azaltmaya ve belirli analiz ve işlemleri daha kolay hale getirmeye yardımcı olur.
+Her sütunda kaç adet eksik değer olduğunu kontrol etmek için isna().sum() fonksiyonunu kullanıyoruz.
+'Mass_margins' sütunundaki eksik değerleri doldurmak için 'bfill' (geriye doğru doldurma) yöntemini kullanıyoruz ve değişiklikleri kalıcı hale getirmek için 'inplace=True' parametresini kullanıyoruz. Daha sonra, eksik değerleri doldurduktan sonra tekrar eksik değerleri kontrol ediyoruz."
+
+15. hücre 
+
+12 ile aynı işlem 
+
+16. hücre 
+
+boş verileri doldurma işlemi 
+
+17. hücre 
+
+"DataFrame'imizde 'SeriesDescription' sütunundaki benzersiz değerlerin sayısını içeren bir DataFrame oluşturmak için value_counts() fonksiyonunu kullanarak 'SeriesDescription' sütununun değerlerinin sayısını hesaplayarak bir DataFrame oluşturuyoruz.
+İndeksi sıfırlayarak 'SeriesDescription' sütununu bir sütun olarak elde etmek için reset_index() yöntemini kullanıyoruz.
+
+18. hücre 
+
+İlk olarak, Data_cleaning_2 DataFrame'inin orijinal sütun isimlerini columns özelliği ile yazdırıyoruz.
+Daha sonra, belirli sütunların adlarını daha iyi anlaşılabilir hale getirmek için rename() yöntemini kullanarak seçili sütunları yeniden adlandırıyoruz.Son olarak, güncellenmiş sütun isimlerini Data_cleaning_2 DataFrame'inde gösteriyoruz.
+
+19. hücre 
+
+İlk olarak, Data_cleaning_2_test DataFrame'inin orijinal sütun isimlerini columns özelliği ile yazdırıyoruz.
+Daha sonra, belirli sütunların adlarını daha iyi anlaşılabilir hale getirmek için rename() yöntemini kullanarak seçili sütunları yeniden adlandırıyoruz.
+Son olarak, güncellenmiş sütun isimlerini Data_cleaning_2_test DataFrame'inde gösteriyoruz.
+
+20. hücre 
+
+üç farklı boş sözlük oluşturuyoruz: full_mammo_dict, cropped_images_dict ve roi_img_dict. Bu sözlükler, farklı türde görüntülerin yollarını depolamak için kullanılacak.
+Daha sonra, full_mammogram_images, cropped_images ve ROI_mask_images listelerini döngüye alarak her birindeki dosya yollarını alıyoruz. Bu döngülerde, dosya yollarını parçalayarak bir benzersiz tanımlayıcı elde ediyoruz ve bu tanımlayıcıyı bir anahtar olarak kullanarak ilgili sözlüğe ekliyoruz.
+Son olarak, full_mammo_dict sözlüğündeki ilk öğenin anahtarlarını göstermek için iter() ve next() fonksiyonlarını kullanarak ilk öğenin anahtarlarını alıyoruz. Bu, sözlüğün nasıl organize edildiğini görmemizi sağlar.
+
+21.  hücre
+
+fix_image_path adında bir fonksiyon tanımlıyoruz. Bu fonksiyon, verilen bir DataFrame içindeki DICOM görüntü yollarını düzeltmek için kullanılacaktır. Fonksiyon, gelen veri setindeki her bir satırı döngüye alarak her bir DICOM görüntü yolunu doğru görüntü yoluna değiştirecek.
+Her döngü adımında, satırdaki DICOM görüntü yolunu alıyoruz (img[11] ve img[12] olarak indekslenmişlerdir) ve bu yolun içindeki benzersiz bir görüntü kimliğini (img_name) ayırıyoruz. Daha sonra, bu kimliği kullanarak full_mammo_dict ve cropped_images_dict sözlüklerinden doğru görüntü yolunu alıyoruz ve DataFrame içindeki ilgili hücreyi güncelliyoruz.
+Son olarak, fix_image_path fonksiyonunu Data_cleaning_2 ve Data_cleaning_2_test DataFrame'lerine uyguluyoruz, böylece her iki veri setindeki DICOM görüntü yolları doğru görüntü yolları ile değiştirilmiş olur.
+
+22. hücre 
+
+İlk olarak, display_images adında bir fonksiyon tanımlıyoruz. Bu fonksiyon, belirli bir sütundaki görüntü yollarını kullanarak veri setindeki görüntüleri görüntülemek için kullanılacaktır. Fonksiyon, belirli bir sütunda belirtilen sayıda görüntüyü görüntüleyecektir.
+Fonksiyon içinde, görüntülerin görüntüleneceği figürü ve eksenleri oluşturuyoruz. Ardından, belirtilen sayıda görüntüyü döngüye alarak her bir görüntüyü görüntülüyoruz.
+Döngü içinde, her bir satırdaki görüntü yolunu alıyoruz (image_path), bu yol üzerinden görüntüyü okuyoruz (mpimg.imread) ve görüntüyü uygun bir şekilde eksenlere ekliyoruz. Her bir görüntü için başlık olarak patoloji türünü (row['pathology']) kullanıyoruz.
+Son olarak, fonksiyonu Data_cleaning_2 DataFrame'indeki 'image_file_path' sütunu ile çağırarak ve ardından Data_cleaning_2 DataFrame'indeki 'cropped_image_file_path' sütunu ile çağırarak görüntüleri görüntülüyoruz.
+
+23. hücre 
+
+fix_image_path2 adında bir fonksiyon tanımlıyoruz. Bu fonksiyon, verilen bir DataFrame içindeki DICOM görüntü yollarını güncellemek için kullanılacaktır.
+Her bir satırı döngüye alarak her bir DICOM görüntü yolundan görüntü ismini ayırıyoruz (img_name).
+Her bir görüntü ismi için, önce full_mammo_dict sözlüğünde olup olmadığını kontrol ediyoruz. Eğer bulunuyorsa, full_mammo_dict sözlüğündeki doğru görüntü yolunu alıyoruz ve ilgili hücreyi güncelliyoruz. Eğer bulunmuyorsa, bir uyarı mesajı yazdırıyoruz.
+Aynı şekilde, cropped_images_dict sözlüğünde görüntü isminin olup olmadığını kontrol ediyoruz. Eğer bulunuyorsa, ilgili görüntü yolunu alıyoruz ve ilgili hücreyi güncelliyoruz. Eğer bulunmuyorsa, bir uyarı mesajı yazdırıyoruz.
+Bu işlemler, DataFrame içindeki her bir DICOM görüntü yolunu güncellemek için yapılır.
+
+
+24. hücre 
+
+Bu işlev, görüntüdeki kontrastı artırmak ve görsel kaliteyi iyileştirmek için kullanılır, özellikle çok parlak veya çok karanlık alanlarda detayları artırmak için uygundur.
+İşlev, ilk olarak gelen görüntüyü LAB renk uzayına dönüştürür. Bu renk uzayında, L kanalı parlaklık bilgisini, a kanalı yeşil-kırmızı eksenin bilgisini ve b kanalı mavi-sarı eksenin bilgisini içerir.
+Sonra, L kanalına CLAHE (Kontrast Sınırlı Adaptif Histogram Eşitleme) uygulanır. Bu işlem, belirli bir kısım sınırlı adaptif histogram eşitleme kullanarak parlaklık kanalındaki kontrastı artırır.
+CLAHE uygulandıktan sonra, orijinal A ve B kanallarıyla birleştirilir ve tekrar BGR renk uzayına dönüştürülür. Son olarak, iyileştirilmiş görüntü döndürülür.
+
+25. hücre 
+
+hazy (sisli) bir görüntüdeki sis etkisini azaltan bir hava temizleme işlemi gerçekleştirir.
+İşlev, öncelikle hazy_image'ı LAB renk uzayına dönüştürür. Bu renk uzayında, L kanalı görüntünün parlaklık bilgisini içerir.
+Ardından, atmosferik ışığı tahmin etmek için L kanalının maksimum değerini bulur.
+Hazy görüntünün karanlık kanalını hesaplamak için hazy_l kanalına MORPH_RECT yapısını kullanarak eritme işlemi gerçekleştirir.
+Daha sonra, iletim haritasını hesaplar. İletim haritası, 1 ile hazy_dark / atmospheric_light arasındaki farktır.
+Rafine edilmiş iletim haritası hesaplar ve buna dayanarak ters iletim haritasını hesaplar.
+Görüntüyü açıklık kazanmak için, dehazed_l hesaplar ve bunu 0 ila 255 aralığında kırpıp dehazed_bgr olarak döndürür.
+
+26. hücre 
+
+
+İşlev, belirtilen görüntüyü (image_path) gri tonlamalı olarak yükler.
+Görüntüden yamasalı bölgeler (patches) çıkarır. Bu, görüntüyü küçük parçalara ayırarak yapılır, bu parçalar daha sonra düşük seviyeli özniteliklerin çıkarılması için kullanılır.
+Çıkarılan yamasalı bölgeleri, seyrek kodlama işlemi yapılabilmesi için uygun bir formata dönüştürür.
+SparseCoder kullanarak seyrek kodlama işlemi gerçekleştirir. Bu işlem, rastgele bir sözlük ve LARS (Least Angle Regression) algoritmasını kullanarak gerçekleştirilir.
+Öğrenilen kodları kullanarak görüntüyü yeniden yapılandırır ve yeniden yapılandırılmış görüntüyü döndürür.
+
+27. hücre 
+
+belirli bir veri setinden bir tam mamogram görüntüsünü ve bu görüntü üzerinde uygulanan farklı işlemleri görüntülemek için kullanılır. İşlemler arasında Kontrast Sınırlı Adaptif Histogram Eşitleme (CLAHE) ve sis azaltma yer alır.
+İlk olarak, mpimg.imread ve cv2.imread fonksiyonları kullanılarak bir tam mamogram görüntüsü yüklenir. Daha sonra, bu görüntüler üzerinde apply_clahe ve haze_reduced_local_global işlevleri uygulanır.
+Son olarak, orijinal görüntü, CLAHE işleminden geçmiş görüntü ve sis azaltma işleminden geçmiş görüntü yan yana yerleştirilerek gösterilir.
+
+28. hücre 
+
+Bu kod, TensorFlow'daki rastgele sayı üretecinin (random number generator) başlangıç durumunu belirlemek için kullanılır. Bu, kodun tekrarlanabilirliğini sağlar.
+Ayrıca, classification adında bir sözlük tanımlanır. Bu sözlük, patoloji türlerini sınıflandırmak için kullanılır. Anahtarlar patoloji türlerini temsil ederken, değerler sınıf etiketlerini temsil eder. Bu durumda, "MALIGNANT" etiketi 0 olarak atanmıştır, "BENIGN_WITHOUT_CALLBACK" ve "BENIGN" etiketleri ise 1 olarak atanmıştır. Bu, iki sınıflı bir sınıflandırma problemini yansıtır.
+
+29. hücre 
+
+bir veri setindeki görüntülerin yüklenmesi ve ilgili patoloji sonuçlarının alınması için kullanılır. load_image, görüntüleri yükler ve boyutunu 224x224 piksele yeniden boyutlandırır. get_pathology, patoloji türlerini sayısal etiketlere dönüştürür, bu da sınıflandırma işlemi için gerekli olan etiketleri sağlar. get_images_result, belirli bir veri setindeki tüm görüntüleri ve bunların patoloji sonuçlarını paralel olarak yükler. Paralel işleme, ThreadPoolExecutor kullanılarak gerçekleştirilir, bu da işlemi hızlandırır. Son olarak, patoloji sonuçları kategorik biçime dönüştürülür. Bu, bir sınıflandırma modelinin kullanabileceği biçime getirir.
+
+30. hücre 
+
+eğitim ve test veri kümelerini karıştırır ve ardından görüntülerin yüklenmesi ve yeniden boyutlandırılması için geçen süreyi ölçer.
+sample(frac=1) yöntemi, veri setini tamamen karıştırır.
+get_images_result fonksiyonu, eğitim ve test veri kümelerindeki görüntülerin yüklenmesi ve boyutlandırılmasını gerçekleştirir. Görüntülerin yüklenmesi ve yeniden boyutlandırılması, paralel işlem kullanılarak gerçekleştirilir.
+Son olarak, eğitim ve test veri kümelerinin şekilleri (boyutları) görüntülenir.
+
+31. hücre 
+
+bir evrişimli sinir ağı (CNN) modeli oluşturur ve eğitir. CNN modeli, evrişim, havuzlama, düzleştirme ve tamamen bağlı katmanlar içerir.
+Oluşturulan model, daha sonra eğitim verileriyle eğitilir ve ayrı bir doğrulama setiyle değerlendirilir. Eğitim, eğitim verilerinin bir veri artırma işleminden geçirilmesiyle gerçekleştirilir. Bu, ImageDataGenerator kullanılarak yapılır ve çeşitli görüntü dönüşümleri uygulanarak veri çeşitliliği artırılır.
+Eğitim sırasında erken durdurma yöntemi uygulanır. Bu, eğitim sırasında doğrulama kaybının artması durumunda eğitimi durdurur ve en iyi ağırlıkları geri yükler.
+Son olarak, modelin doğruluğu ve kaybı ekrana yazdırılır. Bu, modelin performansını değerlendirmek için kullanılır.
+
+32. hücre 
+
+create_cnn_model fonksiyonu, modeli oluştururken kullanılır. Modelin mimarisi tanımlanır ve derlenir. Ayrıca, eğitim sırasında erken durdurma yapılması için bir EarlyStopping geri çağrısı oluşturulur.
+ImageDataGenerator kullanılarak veri artırma işlemi gerçekleştirilir. Bu, veri setindeki görüntülerin rastgele döndürülmesi, kaydırılması, ölçeklendirilmesi ve yatay/ dikey simetrisi gibi dönüşümlerle çeşitlendirilmesini sağlar.
+Eğitim sırasında, veri artırma işleminden geçirilmiş veri akışı kullanılarak model eğitilir. Eğitim sırasında doğrulama veri seti de kullanılır. Erken durdurma kriterine göre, eğitim durdurulabilir.
+Son olarak, modelin performansı, doğrulama setindeki doğruluk ve kayıp metrikleri kullanılarak değerlendirilir. Bu metrikler ekrana yazdırılır.
+
+33. hücre 
+
+Eğitilmiş bir modelin daha sonra kullanılması gerektiğinde, load_model fonksiyonu kullanılarak modeli diskten yükleyebilirsiniz. Bunun için, kaydedilen ".h5" dosyasının yolunu belirtmeniz gerekir. Bu işlem, eğitilmiş modeli yeniden yükleyerek önceki eğitim durumunu korumanıza olanak tanır. 
+
+34. hücre 
+
+Bu kod parçacığı, bir DenseNet121 modelinin eğitilmesini içerir. İlk olarak, DenseNet121 modeli keras.applications modülünden yüklenir. Ardından, bu temel model bir Sequential modeli içine yerleştirilir. Yapay sinir ağına, modelin eğitilmesi için ek katmanlar eklenir. Bu katmanlar, tam bağlı katmanlar ve bir dropout katmanıdır. Model, adam optimizer ile derlenir ve categorical_crossentropy kaybı kullanılarak değerlendirilir.
+Model eğitimi, ImageDataGenerator kullanılarak artırılmış veri akışı ile gerçekleştirilir. Ardından, modelin performansı değerlendirilir ve sonuçlar ekrana yazdırılır.
+
+35. hücre 
+
